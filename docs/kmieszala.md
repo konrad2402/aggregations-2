@@ -133,7 +133,32 @@ db.Text.aggregate(
 ###Zadanie 1e)
 Wyszukać w sieci dane zawierające obiekty GeoJSON. Zapisać dane w bazie MongoDB.
 Dla zapisanych danych przygotować 6–9 różnych Geospatial Queries (co najmniej po jednym dla obiektów Point, LineString i Polygon). W przykładach należy użyć każdego z tych operatorów: *$geoWithin*, *$geoIntersect*, *$near*.    
+# * *
+Znalazłem dane [największych miast na Ziemii](http://cybermoon.pl/wiedza/wspolrzedne_wielkich_miast.html). Po pobaraniu zawartości strony i wyłuskaniu danych za pomocą skryptu przystąpiłem do zaimportowania bazy.
+```sh
+time mongoimport --type csv -c Geo --file jedene.csv --headerline
+connected to: 127.0.0.1
+Thu Jan  2 23:12:59.410 check 9 434
+Thu Jan  2 23:12:59.418 imported 433 objects
 
+real	0m0.061s
+user	0m0.023s
+sys	0m0.026s
+```
+Danych może nie ma dużo, bo 434 miasta, ale wystarczą na potrzeby zadania.
+```sh
+konrad@Konrad:~/Pobrane$ mongo
+MongoDB shell version: 2.4.8
+connecting to: test
+> db.Geo.findOne()
+{
+	"_id" : ObjectId("52c5e46b32b0d3057a517ebc"),
+	"Państwo" : "Afghanistan",
+	"Miasto" : "Kabul",
+	"Szerokość" : "34:30:00",
+	"Długość" : "69:10:00"
+}
+```
 
 
 
